@@ -1,0 +1,12 @@
+<launch>
+
+    <arg name="move_group" value="fanuc_arm" />
+
+    <include file="$(find fanuc_gazebo)/launch/robot_world.launch" />
+
+    <include file="$(find fanuc_gazebo)/launch/gazebo_states.launch" />
+
+    <include file="$(find fanuc_gazebo)/launch/trajectory_controller.launch" />
+
+    <include file="$(find fanuc_lrmate200id_moveit_config)/launch/moveit_planning_execution.launch" />
+</launch>

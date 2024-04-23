@@ -1,0 +1,31 @@
+<launch>  
+    <!-- 加载URDF到参数服务器  
+    <param name="robot_description" textfile="$(find fanuc_gazebo)/urdf/fanuc_lrmate200id.urdf" />   -->
+
+    <!-- 加载ROS controller -->
+    <rosparam file="$(find fanuc_lrmate200id_moveit_config)/config/controllers.yaml" command="load" />
+
+    <!-- 实例化新配置的控制器 -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        args="arm_controller" />
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find fanuc_lrmate200id_support)/urdf/lrmate200id.xacro'" /> 
+
+    <!-- 启动joint_state_publisher节点 -->  
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />  
+  
+    <!-- 启动robot_state_publisher节点，用于发布tf变换 -->  
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />  
+  
+    <!-- 启动Gazebo -->  
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">  
+        <arg name="gui" value="true"/>  
+        <arg name="paused" value="false"/>  
+        <arg name="use_sim_time" value="true"/>  
+    </include>  
+  
+    <!-- 加载机器人到Gazebo -->  
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+      args="-urdf -model fanuc_lrmate200id -param robot_description"/>  
+</launch>

@@ -1,0 +1,2 @@
+fanuc/fanuc:fanuc/fanuc_driver:fanuc/fanuc_lrmate200id_support:fanuc/fanuc_resources:fanuc/moveit_cfgs/fanuc_lrmate200id7l_moveit_config:fanuc/moveit_cfgs/fanuc_lrmate200id_moveit_config:fanuc/moveit_cfgs/fanuc_lrmate200id_moveit_plugins:fanuc_control:fanuc_gazebo
+-DCMAKE_BUILD_TYPE=RelWithDebInfo -DCATKIN_DEVEL_PREFIX=/home/shs/ws_fanuc/devel -DCMAKE_INSTALL_PREFIX=/home/shs/ws_fanuc/install -G Unix Makefiles

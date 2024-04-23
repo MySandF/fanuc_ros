@@ -1,0 +1,16 @@
+<launch>
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description" command="$(find xacro)/xacro 
+      --inorder '$(find fanuc_lrmate200id_support)/urdf/lrmate200id.xacro'" /> 
+      
+    <!-- 启动Gazebo -->  
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">  
+        <arg name="gui" value="true"/>  
+        <arg name="paused" value="false"/>  
+        <arg name="use_sim_time" value="true"/>  
+    </include>  
+
+    <!-- 加载机器人到Gazebo -->  
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+      args="-urdf -model fanuc_lrmate200id -param robot_description"/>  
+</launch>
